@@ -32,10 +32,12 @@
     // Unity's loader reports real progress: about 0-90% is the download, the rest is starting the engine.
     // Once the engine runs, the in-game boot screen (same look) takes over for stage 2.
     var buildUrl = ".";
+    // the version tag makes browsers fetch fresh files after every update (no old/new mix)
+    var ver = "?v=0.3.1";
     var config = {
-      dataUrl: buildUrl + "/WebGL.data.unityweb",
-      frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb",
-      codeUrl: buildUrl + "/WebGL.wasm.unityweb",
+      dataUrl: buildUrl + "/WebGL.data.unityweb" + ver,
+      frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb" + ver,
+      codeUrl: buildUrl + "/WebGL.wasm.unityweb" + ver,
       streamingAssetsUrl: "StreamingAssets",
       companyName: "Eddy",
       productName: "ThunderWar",
@@ -61,7 +63,7 @@
     window.addEventListener("keydown", function (e) { if (e.key === "F5" || e.key === "F6") e.preventDefault(); }, true);
 
     var script = document.createElement("script");
-    script.src = buildUrl + "/WebGL.loader.js";
+    script.src = buildUrl + "/WebGL.loader.js" + ver;
     script.onload = function () {
       createUnityInstance(canvas, config, progress).then(function () {
         document.querySelector("#loader").classList.add("done");
